@@ -8,8 +8,12 @@ import org.example.models.TicketLocation;
 import org.example.models.TicketType;
 
 public class Search {
+    /**
+     * This class handles searches inside the cart Object
+     * @param sc Scanner Object to interact with the user
+     * @param cart Cart Object with the current state of the purchase cart
+     */
     public static void menu(Scanner sc, Cart cart){
-        ArrayList<Ticket> cartArray = cart.getCart();
         boolean done = false;
         Ticket ticket = null;
         ArrayList<Ticket> tickets = null;
@@ -47,22 +51,34 @@ public class Search {
             }
         } while (!done);
         if (ticket != null) {
-            System.out.println(ticket.toString());
+            System.out.println("-".repeat(30));
+            System.out.println(ticket);
+            System.out.println("-".repeat(30));
         }
         if (tickets != null) {
-            System.out.println(tickets.toString());
+            for(Ticket ticket1: tickets){
+                System.out.println("-".repeat(30));
+                System.out.println(ticket1.toString());
+                System.out.println("-".repeat(30));
+            }
+
         }
     }
 
+    /**
+     * Function to search for a certain id inside the cart.
+     * @param sc Scanner Object to interact with the user.
+     * @param cart Cart Object with the current state of the purchase cart.
+     * @return Ticket Object that matches the id.
+     */
     private static Ticket searchById(Scanner sc, Cart cart){
-        int i = -1;
-
+        int i;
         while(true) {
             System.out.print("Ingrese numero de entrada: [1-" + cart.getCart().size() + "] ");
             String index = sc.nextLine();
             try {
                 i = Integer.parseInt(index);
-                // add one to make it Index 1
+                // remove one to interact with index0
                 i--;
                 if (i >= cart.getCart().size() || i < 0) {
                     throw new NumberFormatException();
@@ -76,6 +92,13 @@ public class Search {
             }
         }
     }
+
+    /**
+     * Function to iterate over the cart in search a certain Location
+     * @param sc Scanner Object to interact with the user
+     * @param cart Cart Object with the current state of the purchase cart
+     * @return ArrayList containing the search hits for the query
+     */
     private static ArrayList<Ticket> searchByLocation(Scanner sc, Cart cart){
         ArrayList<Ticket> cartArray = cart.getCart();
         ArrayList<Ticket> partial = new ArrayList<>();
@@ -83,7 +106,7 @@ public class Search {
         TicketLocation location = null;
         while(!done){
             System.out.println("Ingrese la ubicacion");
-            System.out.print("[VIP|PLATEA|GENERAL|GALERIA]");
+            System.out.print("[VIP|PLATEA|GENERAL|GALERIA] ");
             String rawLocation = sc.nextLine().toLowerCase();
             switch (rawLocation) {
                 case "vip":
@@ -113,6 +136,12 @@ public class Search {
         }
         return partial;
     }
+    /**
+     * Function to iterate over the cart in search a certain Type
+     * @param sc Scanner Object to interact with the user
+     * @param cart Cart Object with the current state of the purchase cart
+     * @return ArrayList containing the search hits for the query
+     */
     private static ArrayList<Ticket> searchByType(Scanner sc, Cart cart){
         ArrayList<Ticket> cartArray = cart.getCart();
         ArrayList<Ticket> partial = new ArrayList<>();
@@ -120,14 +149,14 @@ public class Search {
         TicketType type = null;
         while(!done){
             System.out.println("Ingrese el tipo de tarifa");
-            System.out.print("[ESTUDIANTE|TERCERAEDAD|GENERAL]");
+            System.out.print("[ESTUDIANTE|TERCERAEDAD|GENERAL] ");
             String rawType = sc.nextLine().toLowerCase();
             switch (rawType) {
                 case "estudiante":
                     type = TicketType.ESTUDIANTE;
                     done = true;
                     break;
-                case "platea":
+                case "tercera edad", "terceraedad":
                     type = TicketType.TERCERA_EDAD;
                     done = true;
                     break;

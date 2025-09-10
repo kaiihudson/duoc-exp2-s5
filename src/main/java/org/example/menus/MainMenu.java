@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
+    /**
+     * Main class
+     * This program is meant for ticket purchase, search and deletion for TEATRO MORO
+     * @author Sebastian Rodriguez Ravetllat
+     */
     public static void execute(){
         // Initialize variables for the current scope
         Cart cart = new Cart();
@@ -13,6 +18,7 @@ public class MainMenu {
 
         // Generate a menu for repetitive use
         ArrayList<String> menuOptions = new ArrayList<>();
+        menuOptions.add("Menu Principal");
         menuOptions.add("1. Venta de Entradas");
         menuOptions.add("2. Promociones Activas");
         menuOptions.add("3. Busqueda de Entradas");
@@ -24,10 +30,15 @@ public class MainMenu {
 
         System.out.println("Bienvenido a Teatro Moro");
         do {
+            if(!cart.getCart().isEmpty()) {
+                System.out.println("Tu carro contiene: ");
+                System.out.println(cart);
+            }
             // Print the menu in order
             for (String menuOption : menuOptions) {
                 System.out.println(menuOption);
             }
+          System.out.print("Opcion: ");
           String option = sc.nextLine();
           int realOption = 0;
           try {
@@ -47,7 +58,7 @@ public class MainMenu {
                     Search.menu(sc, cart);
                     break;
                 case 4:
-//                    delete();
+                    Delete.menu(sc, cart);
                     break;
                 case 5:
                     done = true;
@@ -58,7 +69,7 @@ public class MainMenu {
           }
 
         } while (!done);
-
+        System.out.println("Gracias por preferir Teatro Moro");
         sc.close();
     }
 }

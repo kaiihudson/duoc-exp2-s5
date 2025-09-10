@@ -1,5 +1,8 @@
 package org.example.models;
 
+/**
+ * Ticket Model
+ */
 public class Ticket {
     TicketLocation location;
     TicketType type = TicketType.GENERAL;
@@ -35,7 +38,8 @@ public class Ticket {
     @Override
     public String toString() {
         return 
-                "Tipo de Entrada: " + location.toString().toLowerCase() + "\n" +
-                "Precio Entrada: $"+ Float.toString(price);
+                "Locacion de Entrada: " + location.toString().toLowerCase() + "\n" +
+                        "Tipo de Entrada: " + type.toString().replace("_", " ")
+                        + "\n" + "Precio Entrada: $"+ price + "\n";
                 }    
 }

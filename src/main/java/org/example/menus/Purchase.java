@@ -9,6 +9,11 @@ import org.example.models.Cart;
 import org.example.services.CartService;
 
 public class Purchase {
+    /**
+     * This class handles addition of Tickets into the cart
+     * @param sc Scanner Object to interact with the user
+     * @param cart Cart Object with the current state of the purchase cart
+     */
     public static void menu(Scanner sc, Cart cart) {
 
         Ticket ticket = new Ticket();
@@ -19,7 +24,7 @@ public class Purchase {
         System.out.println("Tipos de entrada disponible: VIP | PLATEA | GENERAL | GALERIA");
 
         do {
-            System.out.print("Seleccione su tipo de entrada:");
+            System.out.print("Seleccione su tipo de entrada: ");
             String opcion = sc.nextLine().toLowerCase();
 
             switch (opcion){
@@ -52,16 +57,23 @@ public class Purchase {
         }
         // set discount based on price
         Pricing.setDiscount(isStudent, isElderly, ticket);
-        System.out.println(ticket.toString());
+        System.out.println(ticket);
+        System.out.println("=".repeat(30));
         // add ticket to cart
         CartService.addTicket(cart, ticket);
         // update total in cart
-        CartService.updateTotal(cart, ticket);
+        CartService.calculateTotalNewTicket(cart, ticket);
     }
 
+    /**
+     * Helper function to create questions with boolean answer
+     * @param type String Object with the category to ask
+     * @param scanner Scanner Object to interact with the user
+     * @return boolean indicating true or false for the category asked
+     */
     private static boolean askInfo(String type, Scanner scanner){
         do {
-            System.out.println("Es usted " + type + " ? [Y/N]");
+            System.out.print("Es usted " + type + " ? [Y/N] ");
             String answer = scanner.nextLine().toLowerCase();
             switch (answer) {
                  case "y", "s":

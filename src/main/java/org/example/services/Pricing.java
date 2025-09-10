@@ -11,6 +11,10 @@ public class Pricing {
     static float generalPrice = 30000;
     static float galeriaPrice = 20000;
 
+    /**
+     * Function that adds the price to a Ticket Object
+     * @param ticket Ticket Object with a Location set
+     */
     public static void addPrice(Ticket ticket){
         TicketLocation type = ticket.getLocation();
         switch (type){
@@ -30,6 +34,13 @@ public class Pricing {
             default:
         }
     }
+
+    /**
+     * Function to update the price based on if the person is a student or an elderly person
+     * @param student boolean data indicating if student
+     * @param elderly boolean data indicating if elderly person
+     * @param ticket Ticket Object with Location and Price
+     */
     public static void setDiscount(boolean student, boolean elderly, Ticket ticket){
         float currentPrice = ticket.getPrice();
         if (student) {
