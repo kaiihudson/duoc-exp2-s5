@@ -38,13 +38,13 @@ public class MainMenu {
           if (realOption != 0) {
             switch (realOption) {
                 case 1:
-                    Purchase.menu(sc);
+                    Purchase.menu(sc, cart);
                     break;
                 case 2:
-//                    promotions();
+                    Specials.menu();
                     break;
                 case 3:
-//                    search();
+                    Search.menu(sc, cart);
                     break;
                 case 4:
 //                    delete();

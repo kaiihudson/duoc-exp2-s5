@@ -1,13 +1,15 @@
 package org.example.menus;
 
 import org.example.models.Ticket;
-import org.example.models.TicketType;
+import org.example.models.TicketLocation;
 import org.example.services.Pricing;
 
 import java.util.Scanner;
+import org.example.models.Cart;
+import org.example.services.CartService;
 
 public class Purchase {
-    public static void menu(Scanner sc) {
+    public static void menu(Scanner sc, Cart cart) {
 
         Ticket ticket = new Ticket();
 
@@ -22,19 +24,19 @@ public class Purchase {
 
             switch (opcion){
                 case "vip":
-                    ticket.setType(TicketType.VIP);
+                    ticket.setLocation(TicketLocation.VIP);
                     validType = true;
                     break;
                 case "platea":
-                    ticket.setType(TicketType.PLATEA);
+                    ticket.setLocation(TicketLocation.PLATEA);
                     validType = true;
                     break;
                 case "general":
-                    ticket.setType(TicketType.GENERAL);
+                    ticket.setLocation(TicketLocation.GENERAL);
                     validType = true;
                     break;
                 case "galeria":
-                    ticket.setType(TicketType.GALERIA);
+                    ticket.setLocation(TicketLocation.GALERIA);
                     validType = true;
                     break;
                 default:
@@ -48,17 +50,23 @@ public class Purchase {
         if (!isStudent){
             isElderly = askInfo("Tercera Edad", sc);
         }
+        // set discount based on price
         Pricing.setDiscount(isStudent, isElderly, ticket);
+        System.out.println(ticket.toString());
+        // add ticket to cart
+        CartService.addTicket(cart, ticket);
+        // update total in cart
+        CartService.updateTotal(cart, ticket);
     }
 
     private static boolean askInfo(String type, Scanner scanner){
         do {
             System.out.println("Es usted " + type + " ? [Y/N]");
-            String answer = scanner.nextLine();
+            String answer = scanner.nextLine().toLowerCase();
             switch (answer) {
-                 case "Y", "S":
+                 case "y", "s":
                      return true;
-                 case "N":
+                 case "n":
                      return false;
                  default:
                      System.err.println("Opcion no valida");

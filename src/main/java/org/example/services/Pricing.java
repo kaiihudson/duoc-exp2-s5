@@ -1,6 +1,7 @@
 package org.example.services;
 
 import org.example.models.Ticket;
+import org.example.models.TicketLocation;
 import org.example.models.TicketType;
 
 public class Pricing {
@@ -11,7 +12,7 @@ public class Pricing {
     static float galeriaPrice = 20000;
 
     public static void addPrice(Ticket ticket){
-        TicketType type = ticket.getType();
+        TicketLocation type = ticket.getLocation();
         switch (type){
             case VIP:
                 ticket.setPrice(vipPrice);
@@ -33,9 +34,11 @@ public class Pricing {
         float currentPrice = ticket.getPrice();
         if (student) {
             ticket.setPrice(currentPrice * 0.9f);
+            ticket.setType(TicketType.ESTUDIANTE);
         } else {
             if (elderly) {
                 ticket.setPrice(currentPrice * 0.85f);
+                ticket.setType(TicketType.TERCERA_EDAD);
             }
         }
     }
