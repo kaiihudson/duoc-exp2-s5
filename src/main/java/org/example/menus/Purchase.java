@@ -58,7 +58,6 @@ public class Purchase {
         // set discount based on price
         Pricing.setDiscount(isStudent, isElderly, ticket);
         System.out.println(ticket);
-        System.out.println("=".repeat(30));
         // add ticket to cart
         CartService.addTicket(cart, ticket);
         // update total in cart

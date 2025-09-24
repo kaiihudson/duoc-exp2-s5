@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Cart {
     ArrayList<Ticket> cart = new ArrayList<>();
-    float total = 0;
-    float discountedTotal = 0;
+    double total = 0;
+    double discountedTotal = 0;
 
     public Cart() {}
 
@@ -21,15 +21,15 @@ public class Cart {
     }
     
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public void setDiscountedTotal(float discountedTotal) {
+    public void setDiscountedTotal(double discountedTotal) {
         this.discountedTotal = discountedTotal;
     }
 

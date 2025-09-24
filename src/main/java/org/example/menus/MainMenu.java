@@ -20,9 +20,9 @@ public class MainMenu {
         ArrayList<String> menuOptions = new ArrayList<>();
         menuOptions.add("Menu Principal");
         menuOptions.add("1. Venta de Entradas");
-        menuOptions.add("2. Promociones Activas");
-        menuOptions.add("3. Busqueda de Entradas");
-        menuOptions.add("4. Eliminacion de Entradas");
+        menuOptions.add("2. Promociones Activas [DISABLED]");
+        menuOptions.add("3. Busqueda de Entradas [DISABLED]");
+        menuOptions.add("4. Eliminacion de Entradas [DISABLED]");
         menuOptions.add("5. Salir");
 
         // Initalize Scanner
@@ -31,7 +31,7 @@ public class MainMenu {
         System.out.println("Bienvenido a Teatro Moro");
         do {
             if(!cart.getCart().isEmpty()) {
-                System.out.println("Tu carro contiene: ");
+                System.out.println("Tu carro contiene: " + cart.getCart().size() + " entrada(s)");
                 System.out.println(cart);
             }
             // Print the menu in order
@@ -52,13 +52,16 @@ public class MainMenu {
                     Purchase.menu(sc, cart);
                     break;
                 case 2:
-                    Specials.menu();
+//                    Specials.menu();
+                    System.out.println("OPCION DESHABILITADA");
                     break;
                 case 3:
-                    Search.menu(sc, cart);
+//                    Search.menu(sc, cart);
+                    System.out.println("OPCION DESHABILITADA");
                     break;
                 case 4:
-                    Delete.menu(sc, cart);
+//                    Delete.menu(sc, cart);
+                    System.out.println("OPCION DESHABILITADA");
                     break;
                 case 5:
                     done = true;

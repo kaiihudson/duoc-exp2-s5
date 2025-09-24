@@ -42,13 +42,15 @@ public class Pricing {
      * @param ticket Ticket Object with Location and Price
      */
     public static void setDiscount(boolean student, boolean elderly, Ticket ticket){
-        float currentPrice = ticket.getPrice();
+        double currentPrice = ticket.getPrice();
         if (student) {
-            ticket.setPrice(currentPrice * 0.9f);
+            ticket.setAppliedDiscount(0.1);
+            ticket.setPrice(currentPrice * 0.9);
             ticket.setType(TicketType.ESTUDIANTE);
         } else {
             if (elderly) {
-                ticket.setPrice(currentPrice * 0.85f);
+                ticket.setAppliedDiscount(0.15);
+                ticket.setPrice(currentPrice * 0.85);
                 ticket.setType(TicketType.TERCERA_EDAD);
             }
         }

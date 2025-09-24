@@ -6,7 +6,8 @@ package org.example.models;
 public class Ticket {
     TicketLocation location;
     TicketType type = TicketType.GENERAL;
-    float price;
+    double appliedDiscount = 0;
+    double price;
 
     public Ticket() {
     }
@@ -19,11 +20,11 @@ public class Ticket {
         return location;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -35,11 +36,29 @@ public class Ticket {
         this.type = type;
     }
 
+    public void setAppliedDiscount(double appliedDiscount) {
+        this.appliedDiscount = appliedDiscount;
+    }
+
     @Override
     public String toString() {
-        return 
-                "Locacion de Entrada: " + location.toString().toLowerCase() + "\n" +
-                        "Tipo de Entrada: " + type.toString().replace("_", " ")
-                        + "\n" + "Precio Entrada: $"+ price + "\n";
+        String NOMBRE_TEATRO = "Teatro Moro";
+        String header = "=".repeat(40) + "\n"+
+                " ".repeat((40 - NOMBRE_TEATRO.length())/2) + NOMBRE_TEATRO
+                + " ".repeat((40 - NOMBRE_TEATRO.length())/2) + "\n" +
+                "=".repeat(40) + "\n";
+        String discount = "";
+        if (appliedDiscount != 0) {
+            discount = "\nDescuento aplicado: " + appliedDiscount*100 + "%";
+        }
+        return
+                header +
+                "Locacion de Entrada: " + location.toString().toLowerCase()
+                        + "\n" + "Tipo de Entrada: " + type.toString().replace("_", " ").toLowerCase()
+                        +  discount
+                        + "\n" + "Precio Entrada: $"+ price
+                        + "\n" + "=".repeat(40)
+                        + "\nGracias por comprar en " + NOMBRE_TEATRO
+                        + "\n" + "=".repeat(40);
                 }    
 }
